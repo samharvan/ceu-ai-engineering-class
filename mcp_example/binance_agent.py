@@ -5,21 +5,21 @@ from agents import Agent, Runner
 from agents.mcp import MCPServerStreamableHttp
 from agents.stream_events import RawResponsesStreamEvent, RunItemStreamEvent
 
-binance_mcp_local = MCPServerStreamableHttp(
-    name="Binance MCP",
-    params={"url": "http://localhost:8000/mcp"},
-)
-
-# binance_mcp_remote = MCPServerStreamableHttp(
+# binance_mcp = MCPServerStreamableHttp(
 #     name="Binance MCP",
-#     params={"url": "https://binance-mcp.onrender.com/mcp"},
+#     params={"url": "http://localhost:8000/mcp"},
 # )
+
+binance_mcp = MCPServerStreamableHttp(
+    name="Binance MCP",
+    params={"url": "https://binance-mcp.onrender.com/mcp"},
+)
 
 agent = Agent(
     name="Crypto Assistant",
     instructions="You are a helpful crypto assistant. Use the available tools to answer questions about crypto prices.",
     model="litellm/bedrock/eu.amazon.nova-lite-v1:0",
-    mcp_servers=[binance_mcp_local],
+    mcp_servers=[binance_mcp],
 )
 
 
